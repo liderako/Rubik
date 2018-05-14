@@ -1,9 +1,12 @@
 import sys
-from src import *
+from src.readFile import *
+from src.object.managers.ValidationManager import *
 
 if (len(sys.argv) != 2):
     print "Usage: main.py filename"
     sys.exit(1)
-else:
-    print readFile(argv[1])
+readBuffer = readFile(sys.argv[1])
+validationManager = ValidationManager(readBuffer)
 
+validationManager.run()
+# print validationManager.readBuffer
