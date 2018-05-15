@@ -22,7 +22,6 @@ class   ValidationManager:
 
     def     validationSizeContainer(self):
         string = self.readBuffer.split(' ')
-        print string
         for x in string:
             if (len(x) == 0):
                 error("Invalid space")
