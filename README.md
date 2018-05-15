@@ -14,3 +14,7 @@ Group & interpersonal
 Rigor 
 Algorithms & AI 
 ```
+### Run
+```
+python main.py file
+```
