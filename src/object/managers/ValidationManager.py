@@ -13,7 +13,7 @@ class   ValidationManager:
         self.validationSizeContainer()
         self.validationLen()
         self.validationSymbol()
-# /        self.validationSizeSymbol()
+        self.validationSizeSymbol()
 
     def     validationLen(self):
         string = self.readBuffer.split('\n')
@@ -36,16 +36,9 @@ class   ValidationManager:
             if (match):
                 error("Unknow symbol")
 
-    # def validationSizeSymbol(self):
-    #     string = self.readBuffer.split(' ')
-    #     for x in string:
-    #         match = re.search(r'\'{2,3}', x)
-    #         if (match != None):
-    #             error("Invalid size symbols")
-    #         match = re.search(r'2{2,3}', x)
-    #         # print x, "match=", match
-    #         if (match != None):
-    #             error("Invalid size number")
-    #         match = re.search(r'[{2,3}', x)
-    #         if (match != None):
-    #             error("Invalid symbols number")
+    def validationSizeSymbol(self):
+        string = self.readBuffer.split(' ')
+        for x in string:
+            match = re.search(r'[A-Z]+', x)
+            if (match == None):
+                error("Need one char")
