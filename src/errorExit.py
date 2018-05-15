@@ -1,5 +1,5 @@
 import sys
 
-def error(stringError):
+def errorExit(stringError):
     print stringError
     sys.exit(-1)
