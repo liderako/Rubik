@@ -1,6 +1,3 @@
-import numpy as np
-import pandas as pd
-from termcolor import colored
 from colored import fg, bg, attr
 import sys
 
@@ -143,35 +140,35 @@ class Cubik:
 
     def printCubik(self):
         for row in range(self.size):
-            print '\n'
+            print ('\n')
             space = True
             for col in range(self.size):
                 if space:
                     for i in range(self.size):
-                        print ('     '),
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Upper[row][col])), bg(0), attr('reset'))),
+                        print ('     ', end='')
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Upper[row][col])), bg(0), attr('reset')), end='')
                 space = False
         for row in range(self.size):
-            print '\n'
+            print ('\n')
             for col in range(self.size):
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Left[row][col])), bg(0), attr('reset'))),
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Left[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Front[row][col])), bg(0), attr('reset'))),
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Front[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Right[row][col])), bg(0), attr('reset'))),
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Right[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Back[row][col])), bg(0), attr('reset'))),
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Back[row][col])), bg(0), attr('reset')), end='')
         for row in range(self.size):
-            print '\n'
+            print ('\n')
             space = True
             for col in range(self.size):
                 if space:
                     for i in range(self.size):
-                        print ('     '),
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Down[row][col])), bg(0), attr('reset'))),
+                        print ('     ', end='')
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Down[row][col])), bg(0), attr('reset')), end='')
                 space = False
 
-cub = Cubik(3)
+cub = Cubik(1)
 #cub.moveU()
 #cub.moveR()
 #cub.moveR()
@@ -185,7 +182,7 @@ cub = Cubik(3)
 #cub.moveB()
 cub.printCubik()
 # for i in range(3):
-#      print colored(' ### ', '#C0C0C0'),
+#     print ('%s%s ### %s' % (fg(1), bg(0), attr('reset')), end='')
 
 
 #print colorsBack.G + "###" + colorsBack.ENDC
