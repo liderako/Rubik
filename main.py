@@ -20,8 +20,7 @@ if (sys.argv[1] == "-i"):
             sys.exit(-1)
         moveList = mixManager.generateRandomMove(int(sys.argv[2]))
     except:
-        pass
-        errorExit("invalid digital count")
+        errorExit("Invalid digital count")
 else:
     moveList = readBuffer.split(" ")
 print moveList
