@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+from termcolor import colored
+from colored import fg, bg, attr
+import sys
 
 class Cubik:
 
@@ -9,7 +12,8 @@ class Cubik:
         faces = ['Front', 'Back', 'Right', 'Left', 'Upper', 'Down']
         #colors = ['green', 'yellow', 'red', 'orange', 'white', 'blue']
         #colors = ['red', 'orange', 'blue', 'green', 'white', 'yellow']
-        colors = ['green', 'blue', 'red', 'orange',  'white', 'yellow']
+        colors = ['green', 'blue', 'red', 'orange',  'white', 'yellow']  #tested color
+        #colors = ['green', 'blue', 'red', 'orange_4a',  'white', 'yellow']
         self.size = _size
         #size.Front = fill_list( colors[0], _size )
         self.Front = self.fill_list( colors[0], self.size )
@@ -122,6 +126,51 @@ class Cubik:
             self.Down[self.size - 1][i] = self.Right[self.size - 1 - i][self.size - 1]
             self.Right[self.size - 1 - i][self.size - 1] = buflst
 
+    def getColor(self, color):
+        if color == 'green':
+            return 2
+        if color == 'blue':
+            return 4
+        if color == 'red':
+            return 1
+        if color == 'orange':
+            return 58
+        if color == 'white':
+            return 15
+        if color == 'yellow':
+            return 3
+
+
+    def printCubik(self):
+        for row in range(self.size):
+            print '\n'
+            space = True
+            for col in range(self.size):
+                if space:
+                    for i in range(self.size):
+                        print ('     '),
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Upper[row][col])), bg(0), attr('reset'))),
+                space = False
+        for row in range(self.size):
+            print '\n'
+            for col in range(self.size):
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Left[row][col])), bg(0), attr('reset'))),
+            for col in range(self.size):
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Front[row][col])), bg(0), attr('reset'))),
+            for col in range(self.size):
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Right[row][col])), bg(0), attr('reset'))),
+            for col in range(self.size):
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Back[row][col])), bg(0), attr('reset'))),
+        for row in range(self.size):
+            print '\n'
+            space = True
+            for col in range(self.size):
+                if space:
+                    for i in range(self.size):
+                        print ('     '),
+                print ('%s%s ### %s' % (fg(self.getColor(cub.Down[row][col])), bg(0), attr('reset'))),
+                space = False
+
 cub = Cubik(3)
 #cub.moveU()
 #cub.moveR()
@@ -133,12 +182,50 @@ cub = Cubik(3)
 #cub.moveF()
 #cub.moveBapostrophe()
 #cub.moveFapostrophe()
-cub.moveB()
+#cub.moveB()
+cub.printCubik()
+# for i in range(3):
+#      print colored(' ### ', '#C0C0C0'),
 
 
-print "Front ", cub.Front
-print "Upper ", cub.Upper
-print "Left ", cub.Left
-print "Back ", cub.Back
-print "Right ", cub.Right
-print "Down ", cub.Down
+#print colorsBack.G + "###" + colorsBack.ENDC
+#print cub.Front[0][0]
+#print colored('hello', cub.Front[0][0]), colored('world', cub.Front[0][0])
+
+
+#print "Front ", cub.Front
+#print "Upper ", cub.Upper
+#print "Left ", cub.Left
+#print "Back ", cub.Back
+#print "Right ", cub.Right
+#print "Down ", cub.Down
+
+    # def printCubik(self):
+    #     for row in range(self.size):
+    #         print '\n'
+    #         space = True
+    #         for col in range(self.size):
+    #             if space:
+    #                 for i in range(self.size):
+    #                     print ('     '),
+    #             print ('%s%s ### %s' % (fg(getColor(cub.Upper[row][col])), bg(0), attr('reset'))),
+    #             space = False
+    #     for row in range(self.size):
+    #         print '\n'
+    #         for col in range(self.size):
+    #             print colored(' ### ', cub.Left[row][col]),
+    #         for col in range(self.size):
+    #             print colored(' ### ', cub.Front[row][col]),
+    #         for col in range(self.size):
+    #             print colored(' ### ', cub.Right[row][col]),
+    #         for col in range(self.size):
+    #             print colored(' ### ', cub.Back[row][col]),
+    #     for row in range(self.size):
+    #         print '\n'
+    #         space = True
+    #         for col in range(self.size):
+    #             if space:
+    #                 for i in range(self.size):
+    #                     print ('     '),
+    #             print colored(' ### ', cub.Down[row][col]),
+    #             space = False
