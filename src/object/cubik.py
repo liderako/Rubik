@@ -2,15 +2,6 @@ from colored import fg, bg, attr
 import hashlib
 import sys
 
-
-# print ("Front ", cub.Front)
-# print ("Upper ", cub.Upper)
-# print ("Left ", cub.Left)
-# print ("Back ", cub.Back)
-# print ("Right ", cub.Right)
-# print ("Down ", cub.Down)
-
-
 class Cubik:
     def __init__(self, _size):
         faces = ['Front', 'Back', 'Right', 'Left', 'Upper', 'Down']
