@@ -1,28 +1,42 @@
 from colored import fg, bg, attr
+import hashlib
 import sys
 
 class Cubik:
-
-    def __init__( self, _size ):
-        # colors: G - green, O - orange, W - white, Y - yellow, R - red, B - blue
-        # list of rubic faces: Front, Back, Right, Left, Upper, Down
+    def __init__(self, _size):
         faces = ['Front', 'Back', 'Right', 'Left', 'Upper', 'Down']
-        #colors = ['green', 'yellow', 'red', 'orange', 'white', 'blue']
-        #colors = ['red', 'orange', 'blue', 'green', 'white', 'yellow']
-        colors = ['green', 'blue', 'red', 'orange',  'white', 'yellow']  #tested color
-        #colors = ['green', 'blue', 'red', 'orange_4a',  'white', 'yellow']
+        colors = ["green", "blue", "red", "orange", "white", "yellow"]
+        self.colors = colors
         self.size = _size
-        self.Front = self.listFill( colors[0], self.size )
-        self.Back = self.listFill( colors[1], self.size )
-        self.Right = self.listFill( colors[2], self.size )        
-        self.Left = self.listFill( colors[3], self.size )
-        self.Upper = self.listFill( colors[4], self.size )
-        self.Down = self.listFill( colors[5], self.size )
-        #self.Test = [['1', '2', '3', 'a'], ['4', '5', '6', 'b'], ['7', '8', '9', 'c'], ['10', '11', '12', 'd']]
+        self.Front = self.listFill(colors[0], self.size)
+        self.Back = self.listFill(colors[1], self.size)
+        self.Right = self.listFill(colors[2], self.size)
+        self.Left = self.listFill(colors[3], self.size)
+        self.Upper = self.listFill(colors[4], self.size)
+        self.Down = self.listFill(colors[5], self.size)
         self.Test = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
-#self.Test = [['1', '2'], ['3', '4']]
+        self.hash = ""
+        self.mathHash()
 
-    def listFill(self, color, size ):
+    def mathHash(self):
+        hashObj = hashlib.md5()
+        string = ""
+        i = 0
+        while (i < self.size):
+            j = 0
+            while (j < self.size):
+                string = string + self.Front[i][j]
+                string = string + self.Back[i][j]
+                string = string + self.Right[i][j]
+                string = string + self.Left[i][j]
+                string = string + self.Upper[i][j]
+                string = string + self.Down[i][j]
+                j += 1
+            i += 1;
+        hashObj.update(string.encode('utf-8'))
+        self.hash = hashObj.hexdigest()
+
+    def listFill(self, color, size):
         list = []
         for row in range(size):
             string = []
@@ -31,14 +45,13 @@ class Cubik:
             list.append(string)
         return (list)
 
-    # Back - apostrophe
     def moveU(self):
         buflst = self.Right[0]
         self.Right[0] = self.Back[0]
         self.Back[0] = self.Left[0]
         self.Left[0] = self.Front[0]
         self.Front[0] = buflst
-        self.moveFace(self.Upper, 'u')
+        self.moveFront(self.Upper, 'u')
 
     def moveBackU(self):
         buflst = self.Right[0]
@@ -46,7 +59,7 @@ class Cubik:
         self.Front[0] = self.Left[0]
         self.Left[0] = self.Back[0]
         self.Back[0] = buflst
-        self.moveFaceBack(self.Upper, 'u')
+        self.moveFrontBack(self.Upper, 'u')
 
     def moveD(self):
         buflst = self.Right[self.size - 1]
@@ -54,7 +67,7 @@ class Cubik:
         self.Front[self.size - 1] = self.Left[self.size - 1]
         self.Left[self.size - 1] = self.Back[self.size - 1]
         self.Back[self.size - 1] = buflst
-        self.moveFace(self.Down, 'd')
+        self.moveFront(self.Down, 'd')
 
     def moveBackD(self):
         buflst = self.Right[self.size - 1]
@@ -62,7 +75,7 @@ class Cubik:
         self.Back[self.size - 1] = self.Left[self.size - 1]
         self.Left[self.size - 1] = self.Front[self.size - 1]
         self.Front[self.size - 1] = buflst
-        self.moveFaceBack(self.Down, 'd')
+        self.moveFrontBack(self.Down, 'd')
 
     def moveR(self):
         for i in range(self.size):
@@ -71,7 +84,7 @@ class Cubik:
             self.Back[self.size - 1 - i][0] = self.Upper[i][self.size - 1]
             self.Upper[i][self.size - 1] = self.Front[i][self.size - 1]
             self.Front[i][self.size - 1] = buflst
-        self.moveFace(self.Right, 'r')
+        self.moveFront(self.Right, 'r')
 
     def moveBackR(self):
         for i in range(self.size):
@@ -80,7 +93,7 @@ class Cubik:
             self.Front[i][self.size - 1] = self.Upper[i][self.size - 1]
             self.Upper[i][self.size - 1] = self.Back[self.size - 1 - i][0]
             self.Back[self.size - 1 - i][0] = buflst
-        self.moveFaceBack(self.Right, 'r')
+        self.moveFrontBack(self.Right, 'r')
 
     def moveL(self):
         for i in range(self.size):
@@ -89,7 +102,7 @@ class Cubik:
             self.Front[i][0] = self.Upper[i][0]
             self.Upper[i][0] = self.Back[self.size - 1 - i][self.size - 1]
             self.Back[self.size - 1 - i][self.size - 1] = buflst
-        self.moveFace(self.Left, 'l')
+        self.moveFront(self.Left, 'l')
 
     def moveBackL(self):
         for i in range(self.size):
@@ -98,7 +111,7 @@ class Cubik:
             self.Back[self.size - 1 - i][self.size - 1] = self.Upper[i][0]
             self.Upper[i][0] = self.Front[i][0]
             self.Front[i][0] = buflst
-        self.moveFaceBack(self.Left, 'l')
+        self.moveFrontBack(self.Left, 'l')
 
     def moveF(self):
         for i in range(self.size):
@@ -107,7 +120,7 @@ class Cubik:
             self.Left[i][self.size - 1] = self.Down[0][i]
             self.Down[0][i] = self.Right[self.size - 1 - i][0]
             self.Right[self.size - 1 - i][0] = buflst
-        self.moveFace(self.Front, 'f')
+        self.moveFront(self.Front, 'f')
 
     def moveBackF(self):
         for i in range(self.size):
@@ -116,7 +129,7 @@ class Cubik:
             self.Right[i][0] = self.Down[0][self.size - 1 - i]
             self.Down[0][self.size - 1 - i] = self.Left[self.size - 1 - i][self.size - 1]
             self.Left[self.size - 1 - i][self.size - 1] = buflst
-        self.moveFaceBack(self.Front, 'f')
+        self.moveFrontBack(self.Front, 'f')
 
     def moveB(self):
         for i in range(self.size):
@@ -125,7 +138,7 @@ class Cubik:
             self.Right[i][self.size - 1] = self.Down[self.size - 1][self.size - 1 - i]
             self.Down[self.size - 1][self.size - 1 - i] = self.Left[self.size - 1 - i][0]
             self.Left[self.size - 1 - i][0] = buflst
-        self.moveFace(self.Back, 'b')
+        self.moveFront(self.Back, 'b')
 
     def moveBackB(self):
         for i in range(self.size):
@@ -134,19 +147,19 @@ class Cubik:
             self.Left[i][0] = self.Down[self.size - 1][i]
             self.Down[self.size - 1][i] = self.Right[self.size - 1 - i][self.size - 1]
             self.Right[self.size - 1 - i][self.size - 1] = buflst
-        self.moveFaceBack(self.Back, 'b')
+        self.moveFrontBack(self.Back, 'b')
 
-    def moveFace(self, face, g):
-        nlist = [[x[i] for x in face] for i in range(len(face[0]))]
+    def moveFront(self, Front, g):
+        nlist = [[x[i] for x in Front] for i in range(len(Front[0]))]
         for row in range(self.size):
             for col in range(self.size):
-                if col >= int((self.size)/2):
+                if col >= int((self.size) / 2):
                     break
                 else:
                     buf = nlist[row][col]
                     nlist[row][col] = nlist[row][self.size - 1 - col]
                     nlist[row][self.size - 1 - col] = buf
-        print ("Nl", nlist)
+        # print ("Nl", nlist)
         if g == 'f':
             self.Front = nlist
         elif g == 'u':
@@ -160,28 +173,55 @@ class Cubik:
         elif g == 'b':
             self.Back = nlist
 
-    def moveFaceBack(self, face, g):
-        self.moveFace(face, g)
+    def moveFrontBack(self, Front, g):
+        self.moveFront(Front, g)
         if g == 'f':
-            self.moveFace(self.Face, g)
-            self.moveFace(self.Face, g)
+            self.moveFront(self.Front, g)
+            self.moveFront(self.Front, g)
         elif g == 'u':
-            self.moveFace(self.Upper, g)
-            self.moveFace(self.Upper, g)
+            self.moveFront(self.Upper, g)
+            self.moveFront(self.Upper, g)
         elif g == 'd':
-            self.moveFace(self.Down, g)
-            self.moveFace(self.Down, g)
+            self.moveFront(self.Down, g)
+            self.moveFront(self.Down, g)
         elif g == 'l':
-            self.moveFace(self.Left, g)
-            self.moveFace(self.Left, g)
+            self.moveFront(self.Left, g)
+            self.moveFront(self.Left, g)
         elif g == 'r':
-            self.moveFace(self.Right, g)
-            self.moveFace(self.Right, g)
+            self.moveFront(self.Right, g)
+            self.moveFront(self.Right, g)
         elif g == 'b':
-            self.moveFace(self.Back, g)
-            self.moveFace(self.Back, g)
+            self.moveFront(self.Back, g)
+            self.moveFront(self.Back, g)
 
- 
+    def moveDoubleF(self):
+        self.moveF()
+        self.moveF()
+
+    def moveDoubleB(self):
+        self.moveB()
+        self.moveB()
+
+    def moveDoubleD(self):
+        self.moveD()
+        self.moveD()
+
+    def moveDoubleR(self):
+        self.moveR()
+        self.moveR()
+
+    def moveDoubleB(self):
+        self.moveB()
+        self.moveB()
+
+    def moveDoubleL(self):
+        self.moveL()
+        self.moveL()
+
+    def moveDoubleU(self):
+        self.moveU()
+        self.moveU()
+
     def getColor(self, color):
         if color == 'green':
             return 2
@@ -196,99 +236,64 @@ class Cubik:
         if color == 'yellow':
             return 3
 
-
     def printCubik(self):
         for row in range(self.size):
-            print ('\n')
+            print('\n')
             space = True
             for col in range(self.size):
                 if space:
                     for i in range(self.size):
-                        print ('     ', end='')
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Upper[row][col])), bg(0), attr('reset')), end='')
+                        print('     ', end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.Upper[row][col])), bg(0), attr('reset')), end='')
                 space = False
         for row in range(self.size):
-            print ('\n')
+            print('\n')
             for col in range(self.size):
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Left[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.Left[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Front[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.Front[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Right[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.Right[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Back[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.Back[row][col])), bg(0), attr('reset')), end='')
         for row in range(self.size):
-            print ('\n')
+            print('\n')
             space = True
             for col in range(self.size):
                 if space:
                     for i in range(self.size):
-                        print ('     ', end='')
-                print ('%s%s ### %s' % (fg(self.getColor(cub.Down[row][col])), bg(0), attr('reset')), end='')
+                        print('     ', end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.Down[row][col])), bg(0), attr('reset')), end='')
                 space = False
-        print ('\n')
+        print('\n')
 
     def printCubikText(self):
         for row in range(self.size):
-            print ('\n')
+            print('\n')
             space = True
             for col in range(self.size):
                 if space:
                     for i in range(self.size):
-                        print ('          ', end='')
-                print ('[',cub.Upper[row][col],']', end='')
+                        print('          ', end='')
+                print('[', self.Upper[row][col], ']', end='')
                 space = False
         for row in range(self.size):
-            print ('\n')
+            print('\n')
             for col in range(self.size):
-                print ('[',cub.Left[row][col],']', end='')
+                print('[', self.Left[row][col], ']', end='')
             for col in range(self.size):
-                print ('[',cub.Front[row][col],']', end='')
+                print('[', self.Front[row][col], ']', end='')
             for col in range(self.size):
-                print ('[',cub.Right[row][col],']', end='')
+                print('[', self.Right[row][col], ']', end='')
             for col in range(self.size):
-                print ('[',cub.Back[row][col],']', end='')
+                print('[', self.Back[row][col], ']', end='')
         for row in range(self.size):
-            print ('\n')
+            print('\n')
             space = True
             for col in range(self.size):
                 if space:
                     for i in range(self.size):
-                        print ('          ', end='')
-                print ('[',cub.Down[row][col],']', end='')
+                        print('          ', end='')
+                print('[', self.Down[row][col], ']', end='')
                 space = False
-        print ('\n')
-
-cub = Cubik(3)
-#cub.moveU()
-#cub.moveR()
-#cub.moveR()
-cub.moveBackL()
-#cub.moveL()
-#cub.moveBackR()
-#cub.moveBackD()
-#cub.moveBackU()
-#cub.moveU()
-#cub.moveF()
-cub.moveBackB()
-#cub.moveBackF()
-#cub.moveB()
-cub.printCubik()
-#cub.printCubikText()
-#cub.moveFaceBack(cub.Test, 'b')
-#print (cub.Back)
-# !!!Problem Rback + Bback
-
-# for i in range(3):
-#     print ('%s%s ### %s' % (fg(1), bg(0), attr('reset')), end='')
-
-
-
-
-#print ("Front ", cub.Front)
-#print ("Upper ", cub.Upper)
-#print ("Left ", cub.Left)
-#print ("Back ", cub.Back)
-#print ("Right ", cub.Right)
-#print ("Down ", cub.Down)
-
+        print('\n')
