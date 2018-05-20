@@ -1,8 +1,8 @@
 import sys
-from object.cubik import *
+from Cubik import *
 
 class CheckerColors:
-    def Two(self, cub, color1, color2):
+    def two(self, cub, color1, color2):
         if (cub.Upper[0][1] == color1 and cub.Back[0][1] == color2):
             return ([['Upper', color1, 0, 1],['Back', color2, 0, 1]])
         elif (cub.Upper[0][1] == color2 and cub.Back[0][1] == color1):
@@ -51,7 +51,7 @@ class CheckerColors:
             return ([['Down', color1, 1, 0],['Left', color2, 2, 1]])
         elif (cub.Down[1][0] == color2 and cub.Left[2][1] == color1):
             return ([['Down', color2, 1, 0],['Left', color1, 2, 1]])
-    def Three(self, cub, color1, color2, color3):
+    def three(self, cub, color1, color2, color3):
 #
         if (cub.Upper[0][0] == color1 and cub.Left[0][0] == color2 and cub.Back[0][2] == color3):
             return ([['Upper', color1, 0, 0],['Left', color2, 0, 0]], ['Back', color3, 0, 2])
@@ -117,5 +117,5 @@ cub.printCubik()
 
 checkerColors = CheckerColors()
 
-checkerColors.Two(cub, 'white', 'blue')
+print (checkerColors.three(cub, 'white', 'blue', 'red'))
 cub.printCubik()

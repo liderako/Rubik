@@ -33,6 +33,8 @@ class MixManager:
                 cub.moveL()
             elif (elem == "U"):
                 cub.moveU()
+            elif (elem == "D"):
+                cub.moveD()
             elif (elem == "F2"):
                 cub.moveDoubleF()
             elif (elem == "B2"):
@@ -43,6 +45,8 @@ class MixManager:
                 cub.moveDoubleL()
             elif (elem == "U2"):
                 cub.moveDoubleU()
+            elif (elem == "D2"):
+                cub.moveDoubleD()
             elif (elem == "F'"):
                 cub.moveBackF()
             elif (elem == "B'"):
@@ -53,4 +57,6 @@ class MixManager:
                 cub.moveBackL()
             elif (elem == "U'"):
                 cub.moveBackU()
+            elif (elem == "D'"):
+                cub.moveBackD()
         return (cub)
