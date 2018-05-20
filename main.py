@@ -4,6 +4,7 @@ from src.errorExit import *
 from src.object.managers.ValidationManager import ValidationManager
 from src.object.managers.MixManager import MixManager
 from src.object.Cubik import Cubik
+from src.object.CheckerColors import CheckerColors
 
 if (len(sys.argv) != 3):
     print ("Usage: main.py [-i or -f] [count i or fileName]")
@@ -28,3 +29,12 @@ else:
 cub = Cubik(3)
 mixManager.mixRun(moveList, cub)
 cub.printCubik()
+
+checkerColors = CheckerColors()
+#print (checkerColors.two(cub, 'yellow', 'blue'))
+print (checkerColors.three(cub, 'red', 'blue', 'white'))
+
+
+#colors = ["green", "blue", "red", "orange", "white", "yellow"]
+
+

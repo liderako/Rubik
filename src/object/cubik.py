@@ -97,7 +97,7 @@ class Cubik:
 
     def moveL(self):
         for i in range(self.size):
-            buflst = self.Down[i][self.size - 1]
+            buflst = self.Down[i][0]
             self.Down[i][0] = self.Front[i][0]
             self.Front[i][0] = self.Upper[i][0]
             self.Upper[i][0] = self.Back[self.size - 1 - i][self.size - 1]
