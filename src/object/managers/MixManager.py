@@ -1,7 +1,7 @@
 import sys
 import random
 from src.errorExit import errorExit
-
+from src.object.cubik import *
 class MixManager:
 
     def __init__(self):
