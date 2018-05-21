@@ -1,7 +1,8 @@
 import sys
-#from Cubik import Cubik
+from src.object.Cubik import Cubik
 
 class CheckerColors:
+
     def two(self, cub, color1, color2):
         if (cub.Upper[0][1] == color1 and cub.Back[0][1] == color2):
             return ([['Upper', color1, 0, 1],['Back', color2, 0, 1]])
@@ -63,8 +64,8 @@ class CheckerColors:
         elif (cub.Down[1][0] == color2 and cub.Left[2][1] == color1):
             return ([['Down', color2, 1, 0],['Left', color1, 2, 1]])
         return (False)
+
     def three(self, cub, color1, color2, color3):
-#f
         if (cub.Upper[0][0] == color1 and cub.Left[0][0] == color2 and cub.Back[0][2] == color3):
             return ([['Upper', color1, 0, 0],['Left', color2, 0, 0]], ['Back', color3, 0, 2])
         elif (cub.Upper[0][0] == color1 and cub.Left[0][0] == color3 and cub.Back[0][2] == color2):
@@ -169,14 +170,3 @@ class CheckerColors:
         elif (cub.Down[2][0] == color3 and cub.Left[2][0] == color2 and cub.Back[2][2] == color1):
             return ([['Down', color3, 2, 2],['Left', color2, 2, 0]], ['Back', color1, 2, 2])
         return (False)
-
-
-#cub = Cubik(3)
-
-
-#cub.printCubik()
-
-#checkerColors = CheckerColors()
-
-#print (checkerColors.three(cub, 'white', 'blue', 'red'))
-#cub.printCubik()
