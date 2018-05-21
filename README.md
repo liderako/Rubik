@@ -19,5 +19,5 @@ Algorithms & AI
 python main.py [-i or -f] [number i or fileName]
 ```
 ## :muscle: Authors
-* [**Anton Sviridov**](https://github.com/liderako/)
+* [**Antonio Sviridov**](https://github.com/liderako/)
 * [**Oleksii Borysenko**](https://github.com/oborys)
