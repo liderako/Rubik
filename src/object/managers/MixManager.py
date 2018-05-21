@@ -2,11 +2,11 @@ import sys
 import random
 from src.errorExit import errorExit
 from src.object.Cubik import *
+
 class MixManager:
 
     def __init__(self):
         self.maxCount = 500
-        # F B R L U F2 B2 R2 L2 U2 F' B' R' L' U'
         self.listAvailableCommand = ["F", "D", "B", "R", "L", "U", "F2", "D2", "B2", "R2", "L2", "U2", "F'", "B'", "R'", "L'", "U'", "D'"]
 
     def generateRandomMove(self, countMove):
@@ -19,7 +19,6 @@ class MixManager:
             n = random.randint(0, size)
             listMove.append(self.listAvailableCommand[n])
         return listMove
-
 
     def mixRun(self, listMove, cub):
         for elem in listMove:

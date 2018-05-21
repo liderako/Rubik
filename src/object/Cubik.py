@@ -3,18 +3,17 @@ import hashlib
 import sys
 
 class Cubik:
-    def __init__(self, _size):
-        faces = ['Front', 'Back', 'Right', 'Left', 'Upper', 'Down']
+    def __init__(self, size):
+        faces = ['front', 'back', 'right', 'left', 'upper', 'down']
         colors = ["green", "blue", "red", "orange", "white", "yellow"]
         self.colors = colors
-        self.size = _size
-        self.Front = self.listFill(colors[0], self.size)
-        self.Back = self.listFill(colors[1], self.size)
-        self.Right = self.listFill(colors[2], self.size)
-        self.Left = self.listFill(colors[3], self.size)
-        self.Upper = self.listFill(colors[4], self.size)
-        self.Down = self.listFill(colors[5], self.size)
-        self.Test = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
+        self.size = size
+        self.front = self.listFill(colors[0], self.size)
+        self.back = self.listFill(colors[1], self.size)
+        self.right = self.listFill(colors[2], self.size)
+        self.left = self.listFill(colors[3], self.size)
+        self.upper = self.listFill(colors[4], self.size)
+        self.down = self.listFill(colors[5], self.size)
         self.hash = ""
         self.mathHash()
 
@@ -25,12 +24,12 @@ class Cubik:
         while (i < self.size):
             j = 0
             while (j < self.size):
-                string = string + self.Front[i][j]
-                string = string + self.Back[i][j]
-                string = string + self.Right[i][j]
-                string = string + self.Left[i][j]
-                string = string + self.Upper[i][j]
-                string = string + self.Down[i][j]
+                string = string + self.front[i][j]
+                string = string + self.back[i][j]
+                string = string + self.right[i][j]
+                string = string + self.left[i][j]
+                string = string + self.upper[i][j]
+                string = string + self.down[i][j]
                 j += 1
             i += 1;
         hashObj.update(string.encode('utf-8'))
@@ -46,111 +45,111 @@ class Cubik:
         return (list)
 
     def moveU(self):
-        buflst = self.Right[0]
-        self.Right[0] = self.Back[0]
-        self.Back[0] = self.Left[0]
-        self.Left[0] = self.Front[0]
-        self.Front[0] = buflst
-        self.moveFront(self.Upper, 'u')
+        buflst = self.right[0]
+        self.right[0] = self.back[0]
+        self.back[0] = self.left[0]
+        self.left[0] = self.front[0]
+        self.front[0] = buflst
+        self.moveFront(self.upper, 'u')
 
     def moveBackU(self):
-        buflst = self.Right[0]
-        self.Right[0] = self.Front[0]
-        self.Front[0] = self.Left[0]
-        self.Left[0] = self.Back[0]
-        self.Back[0] = buflst
-        self.moveFrontBack(self.Upper, 'u')
+        buflst = self.right[0]
+        self.right[0] = self.front[0]
+        self.front[0] = self.left[0]
+        self.left[0] = self.back[0]
+        self.back[0] = buflst
+        self.moveFrontBack(self.upper, 'u')
 
     def moveD(self):
-        buflst = self.Right[self.size - 1]
-        self.Right[self.size - 1] = self.Front[self.size - 1]
-        self.Front[self.size - 1] = self.Left[self.size - 1]
-        self.Left[self.size - 1] = self.Back[self.size - 1]
-        self.Back[self.size - 1] = buflst
-        self.moveFront(self.Down, 'd')
+        buflst = self.right[self.size - 1]
+        self.right[self.size - 1] = self.front[self.size - 1]
+        self.front[self.size - 1] = self.left[self.size - 1]
+        self.left[self.size - 1] = self.back[self.size - 1]
+        self.back[self.size - 1] = buflst
+        self.moveFront(self.down, 'd')
 
     def moveBackD(self):
-        buflst = self.Right[self.size - 1]
-        self.Right[self.size - 1] = self.Back[self.size - 1]
-        self.Back[self.size - 1] = self.Left[self.size - 1]
-        self.Left[self.size - 1] = self.Front[self.size - 1]
-        self.Front[self.size - 1] = buflst
-        self.moveFrontBack(self.Down, 'd')
+        buflst = self.right[self.size - 1]
+        self.right[self.size - 1] = self.back[self.size - 1]
+        self.back[self.size - 1] = self.left[self.size - 1]
+        self.left[self.size - 1] = self.front[self.size - 1]
+        self.front[self.size - 1] = buflst
+        self.moveFrontBack(self.down, 'd')
 
     def moveR(self):
         for i in range(self.size):
-            buflst = self.Down[i][self.size - 1]
-            self.Down[i][self.size - 1] = self.Back[self.size - 1 - i][0]
-            self.Back[self.size - 1 - i][0] = self.Upper[i][self.size - 1]
-            self.Upper[i][self.size - 1] = self.Front[i][self.size - 1]
-            self.Front[i][self.size - 1] = buflst
-        self.moveFront(self.Right, 'r')
+            buflst = self.down[i][self.size - 1]
+            self.down[i][self.size - 1] = self.back[self.size - 1 - i][0]
+            self.back[self.size - 1 - i][0] = self.upper[i][self.size - 1]
+            self.upper[i][self.size - 1] = self.front[i][self.size - 1]
+            self.front[i][self.size - 1] = buflst
+        self.moveFront(self.right, 'r')
 
     def moveBackR(self):
         for i in range(self.size):
-            buflst = self.Down[i][self.size - 1]
-            self.Down[i][self.size - 1] = self.Front[i][self.size - 1]
-            self.Front[i][self.size - 1] = self.Upper[i][self.size - 1]
-            self.Upper[i][self.size - 1] = self.Back[self.size - 1 - i][0]
-            self.Back[self.size - 1 - i][0] = buflst
-        self.moveFrontBack(self.Right, 'r')
+            buflst = self.down[i][self.size - 1]
+            self.down[i][self.size - 1] = self.front[i][self.size - 1]
+            self.front[i][self.size - 1] = self.upper[i][self.size - 1]
+            self.upper[i][self.size - 1] = self.back[self.size - 1 - i][0]
+            self.back[self.size - 1 - i][0] = buflst
+        self.moveFrontBack(self.right, 'r')
 
     def moveL(self):
         for i in range(self.size):
-            buflst = self.Down[i][0]
-            self.Down[i][0] = self.Front[i][0]
-            self.Front[i][0] = self.Upper[i][0]
-            self.Upper[i][0] = self.Back[self.size - 1 - i][self.size - 1]
-            self.Back[self.size - 1 - i][self.size - 1] = buflst
-        self.moveFront(self.Left, 'l')
+            buflst = self.down[i][0]
+            self.down[i][0] = self.front[i][0]
+            self.front[i][0] = self.upper[i][0]
+            self.upper[i][0] = self.back[self.size - 1 - i][self.size - 1]
+            self.back[self.size - 1 - i][self.size - 1] = buflst
+        self.moveFront(self.left, 'l')
 
     def moveBackL(self):
         for i in range(self.size):
-            buflst = self.Down[i][0]
-            self.Down[i][0] = self.Back[self.size - 1 - i][self.size - 1]
-            self.Back[self.size - 1 - i][self.size - 1] = self.Upper[i][0]
-            self.Upper[i][0] = self.Front[i][0]
-            self.Front[i][0] = buflst
-        self.moveFrontBack(self.Left, 'l')
+            buflst = self.down[i][0]
+            self.down[i][0] = self.back[self.size - 1 - i][self.size - 1]
+            self.back[self.size - 1 - i][self.size - 1] = self.upper[i][0]
+            self.upper[i][0] = self.front[i][0]
+            self.front[i][0] = buflst
+        self.moveFrontBack(self.left, 'l')
 
     def moveF(self):
         for i in range(self.size):
-            buflst = self.Upper[self.size - 1][self.size - 1 - i]
-            self.Upper[self.size - 1][self.size - 1 - i] = self.Left[i][self.size - 1]
-            self.Left[i][self.size - 1] = self.Down[0][i]
-            self.Down[0][i] = self.Right[self.size - 1 - i][0]
-            self.Right[self.size - 1 - i][0] = buflst
-        self.moveFront(self.Front, 'f')
+            buflst = self.upper[self.size - 1][self.size - 1 - i]
+            self.upper[self.size - 1][self.size - 1 - i] = self.left[i][self.size - 1]
+            self.left[i][self.size - 1] = self.down[0][i]
+            self.down[0][i] = self.right[self.size - 1 - i][0]
+            self.right[self.size - 1 - i][0] = buflst
+        self.moveFront(self.front, 'f')
 
     def moveBackF(self):
         for i in range(self.size):
-            buflst = self.Upper[self.size - 1][i]
-            self.Upper[self.size - 1][i] = self.Right[i][0]
-            self.Right[i][0] = self.Down[0][self.size - 1 - i]
-            self.Down[0][self.size - 1 - i] = self.Left[self.size - 1 - i][self.size - 1]
-            self.Left[self.size - 1 - i][self.size - 1] = buflst
-        self.moveFrontBack(self.Front, 'f')
+            buflst = self.upper[self.size - 1][i]
+            self.upper[self.size - 1][i] = self.right[i][0]
+            self.right[i][0] = self.down[0][self.size - 1 - i]
+            self.down[0][self.size - 1 - i] = self.left[self.size - 1 - i][self.size - 1]
+            self.left[self.size - 1 - i][self.size - 1] = buflst
+        self.moveFrontBack(self.front, 'f')
 
     def moveB(self):
         for i in range(self.size):
-            buflst = self.Upper[0][i]
-            self.Upper[0][i] = self.Right[i][self.size - 1]
-            self.Right[i][self.size - 1] = self.Down[self.size - 1][self.size - 1 - i]
-            self.Down[self.size - 1][self.size - 1 - i] = self.Left[self.size - 1 - i][0]
-            self.Left[self.size - 1 - i][0] = buflst
-        self.moveFront(self.Back, 'b')
+            buflst = self.upper[0][i]
+            self.upper[0][i] = self.right[i][self.size - 1]
+            self.right[i][self.size - 1] = self.down[self.size - 1][self.size - 1 - i]
+            self.down[self.size - 1][self.size - 1 - i] = self.left[self.size - 1 - i][0]
+            self.left[self.size - 1 - i][0] = buflst
+        self.moveFront(self.back, 'b')
 
     def moveBackB(self):
         for i in range(self.size):
-            buflst = self.Upper[0][self.size - 1 - i]
-            self.Upper[0][self.size - 1 - i] = self.Left[i][0]
-            self.Left[i][0] = self.Down[self.size - 1][i]
-            self.Down[self.size - 1][i] = self.Right[self.size - 1 - i][self.size - 1]
-            self.Right[self.size - 1 - i][self.size - 1] = buflst
-        self.moveFrontBack(self.Back, 'b')
+            buflst = self.upper[0][self.size - 1 - i]
+            self.upper[0][self.size - 1 - i] = self.left[i][0]
+            self.left[i][0] = self.down[self.size - 1][i]
+            self.down[self.size - 1][i] = self.right[self.size - 1 - i][self.size - 1]
+            self.right[self.size - 1 - i][self.size - 1] = buflst
+        self.moveFrontBack(self.back, 'b')
 
-    def moveFront(self, Front, g):
-        nlist = [[x[i] for x in Front] for i in range(len(Front[0]))]
+    def moveFront(self, front, g):
+        nlist = [[x[i] for x in front] for i in range(len(front[0]))]
         for row in range(self.size):
             for col in range(self.size):
                 if col >= int((self.size) / 2):
@@ -159,40 +158,39 @@ class Cubik:
                     buf = nlist[row][col]
                     nlist[row][col] = nlist[row][self.size - 1 - col]
                     nlist[row][self.size - 1 - col] = buf
-        # print ("Nl", nlist)
         if g == 'f':
-            self.Front = nlist
+            self.front = nlist
         elif g == 'u':
-            self.Upper = nlist
+            self.upper = nlist
         elif g == 'd':
-            self.Down = nlist
+            self.down = nlist
         elif g == 'l':
-            self.Left = nlist
+            self.left = nlist
         elif g == 'r':
-            self.Right = nlist
+            self.right = nlist
         elif g == 'b':
-            self.Back = nlist
+            self.back = nlist
 
-    def moveFrontBack(self, Front, g):
-        self.moveFront(Front, g)
+    def moveFrontBack(self, front, g):
+        self.moveFront(front, g)
         if g == 'f':
-            self.moveFront(self.Front, g)
-            self.moveFront(self.Front, g)
+            self.moveFront(self.front, g)
+            self.moveFront(self.front, g)
         elif g == 'u':
-            self.moveFront(self.Upper, g)
-            self.moveFront(self.Upper, g)
+            self.moveFront(self.upper, g)
+            self.moveFront(self.upper, g)
         elif g == 'd':
-            self.moveFront(self.Down, g)
-            self.moveFront(self.Down, g)
+            self.moveFront(self.down, g)
+            self.moveFront(self.down, g)
         elif g == 'l':
-            self.moveFront(self.Left, g)
-            self.moveFront(self.Left, g)
+            self.moveFront(self.left, g)
+            self.moveFront(self.left, g)
         elif g == 'r':
-            self.moveFront(self.Right, g)
-            self.moveFront(self.Right, g)
+            self.moveFront(self.right, g)
+            self.moveFront(self.right, g)
         elif g == 'b':
-            self.moveFront(self.Back, g)
-            self.moveFront(self.Back, g)
+            self.moveFront(self.back, g)
+            self.moveFront(self.back, g)
 
     def moveDoubleF(self):
         self.moveF()
@@ -244,18 +242,18 @@ class Cubik:
                 if space:
                     for i in range(self.size):
                         print('     ', end='')
-                print('%s%s ### %s' % (fg(self.getColor(self.Upper[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.upper[row][col])), bg(0), attr('reset')), end='')
                 space = False
         for row in range(self.size):
             print('\n')
             for col in range(self.size):
-                print('%s%s ### %s' % (fg(self.getColor(self.Left[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.left[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print('%s%s ### %s' % (fg(self.getColor(self.Front[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.front[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print('%s%s ### %s' % (fg(self.getColor(self.Right[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.right[row][col])), bg(0), attr('reset')), end='')
             for col in range(self.size):
-                print('%s%s ### %s' % (fg(self.getColor(self.Back[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.back[row][col])), bg(0), attr('reset')), end='')
         for row in range(self.size):
             print('\n')
             space = True
@@ -263,7 +261,7 @@ class Cubik:
                 if space:
                     for i in range(self.size):
                         print('     ', end='')
-                print('%s%s ### %s' % (fg(self.getColor(self.Down[row][col])), bg(0), attr('reset')), end='')
+                print('%s%s ### %s' % (fg(self.getColor(self.down[row][col])), bg(0), attr('reset')), end='')
                 space = False
         print('\n')
 
@@ -275,18 +273,18 @@ class Cubik:
                 if space:
                     for i in range(self.size):
                         print('          ', end='')
-                print('[', self.Upper[row][col], ']', end='')
+                print('[', self.upper[row][col], ']', end='')
                 space = False
         for row in range(self.size):
             print('\n')
             for col in range(self.size):
-                print('[', self.Left[row][col], ']', end='')
+                print('[', self.left[row][col], ']', end='')
             for col in range(self.size):
-                print('[', self.Front[row][col], ']', end='')
+                print('[', self.front[row][col], ']', end='')
             for col in range(self.size):
-                print('[', self.Right[row][col], ']', end='')
+                print('[', self.right[row][col], ']', end='')
             for col in range(self.size):
-                print('[', self.Back[row][col], ']', end='')
+                print('[', self.back[row][col], ']', end='')
         for row in range(self.size):
             print('\n')
             space = True
@@ -294,6 +292,6 @@ class Cubik:
                 if space:
                     for i in range(self.size):
                         print('          ', end='')
-                print('[', self.Down[row][col], ']', end='')
+                print('[', self.down[row][col], ']', end='')
                 space = False
         print('\n')
