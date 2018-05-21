@@ -57,21 +57,31 @@ class ManagerStepOne:
 				solveMoveList.append("B'")
 			self.listPositionCubCurrent = self.checkerManager.two(cubCurrent, colorOne, colorTwo)
 	
-	def 	moveDownTwoColor(self, cubCurrent, solveMoveList, face, colorOne, colorTwo):
-		while (self.listPositionCubCurrent[0][0] != "down" or self.listPositionCubCurrent[0][1] != "down"):
-			if (face == "front"):
+	def 	moveDownTwoColor(self, cubCurrent, solveMoveList, colorOne, colorTwo):
+		faceOne = self.listPositionCubCurrent[0][0]
+		faceTwo = self.listPositionCubCurrent[0][1]
+		while (faceOne != "down" or faceTwo != "down"):
+			# if (faceOne == "down" or faceTwo == "down"):
+				# break ;
+			if (faceOne == "front" or faceTwo == "front"):
 				cubCurrent.moveF()
 				solveMoveList.append("F")
-			elif (face == "left"):
+			elif (faceOne == "left" or faceTwo == "left"):
 				cubCurrent.moveL()
 				solveMoveList.append("L")
-			elif (face == "Right"):
+			elif (faceOne == "right" or faceTwo == "right"):
 				cubCurrent.moveR()
 				solveMoveList.append("R")
-			elif (face == "Back"):
+			elif (faceOne == "back" or faceTwo == "back"):
+				cubCurrent.moveB()
+				solveMoveList.append("B")
+			elif (faceOne == "upper" or faceTwo == "upper"):
 				cubCurrent.moveB()
 				solveMoveList.append("B")
 			self.listPositionCubCurrent = self.checkerManager.two(cubCurrent, colorOne, colorTwo)
+			faceOne = self.listPositionCubCurrent[0][0]
+			faceTwo = self.listPositionCubCurrent[0][1]
+			print (self.listPositionCubCurrent)
 		print ("OK", self.listPositionCubCurrent)
 		sys.exit(-1)
 		# while (self.listPositionCubCurrent)
