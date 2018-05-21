@@ -16,5 +16,5 @@ Algorithms & AI
 ```
 ### Run
 ```
-python main.py file
+python main.py [-i or -f] [number i or fileName]
 ```
