@@ -4,8 +4,6 @@ from src.object.Cubik import Cubik
 class CheckerColors:
 
     def two(self, cub, colorOne, colorTwo):
-        # print (cub.front[1][2])
-        # print (cub.right[1][0])
         if (cub.upper[0][1] == colorOne and cub.back[0][1] == colorTwo):
             return ([['upper', colorOne, 0, 1],['back', colorTwo, 0, 1]])
         elif (cub.upper[0][1] == colorTwo and cub.back[0][1] == colorOne):

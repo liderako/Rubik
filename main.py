@@ -31,13 +31,12 @@ else:
     moveList = readBuffer.split(" ")
 cub = Cubik(3)
 mixManager.mixRun(moveList, cub)
-print (moveList)
+
+print ("MixMoveList")
+for x in moveList:
+    print (x, end=" ")
 cub.printCubik()
 
 algorithm = Algorithm(cub)
-
 algorithm.run()
-# checkerColors = CheckerColors()
-
-# checkerColors.two(cub, "white", "blue")
 

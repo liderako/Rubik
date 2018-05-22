@@ -13,3 +13,7 @@ class Algorithm:
 
 		managerStepOne = ManagerStepOne(cubOrigin)
 		managerStepOne.run(self.cub, self.solveMoveList)
+		self.cub.printCubik()
+		print ("Solve Move")
+		for x in self.solveMoveList:
+			print (x, end=" ")
