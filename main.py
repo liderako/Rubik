@@ -5,6 +5,7 @@ from src.object.managers.ValidationManager import ValidationManager
 from src.object.managers.MixManager import MixManager
 from src.object.Cubik import Cubik
 from src.object.CheckerColors import CheckerColors
+from src.object.algorithm.Algorithm import *
 
 stringUsage = "Usage: main.py [-i or -f] [count i or fileName]"
 if (len(sys.argv) != 3):
@@ -28,12 +29,14 @@ if (sys.argv[1] == "-i"):
         errorExit("Invalid digital count")
 else:
     moveList = readBuffer.split(" ")
-print (moveList)
 cub = Cubik(3)
 mixManager.mixRun(moveList, cub)
+
+print ("MixMoveList")
+for x in moveList:
+    print (x, end=" ")
 cub.printCubik()
 
-checkerColors = CheckerColors()
-
-checkerColors.two(cub, "white", "blue")
+algorithm = Algorithm(cub)
+algorithm.run()
 

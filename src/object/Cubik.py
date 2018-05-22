@@ -208,10 +208,6 @@ class Cubik:
         self.moveR()
         self.moveR()
 
-    def moveDoubleB(self):
-        self.moveB()
-        self.moveB()
-
     def moveDoubleL(self):
         self.moveL()
         self.moveL()
@@ -220,7 +216,8 @@ class Cubik:
         self.moveU()
         self.moveU()
 
-    def getColor(self, color):
+    @staticmethod
+    def getColor(color):
         if color == 'green':
             return 2
         if color == 'blue':
