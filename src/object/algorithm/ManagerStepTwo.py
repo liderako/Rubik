@@ -11,6 +11,7 @@ class ManagerStepTwo:
 		self.checkerManager = CheckerColors()
 
 	def 	run(self, cubCurrent, solveMoveList):
+		print ("------------------------------------------------")
 		if ((self.finishedThreeColorPosition(cubCurrent, "white", "green", "red")) == False):
 			self.moving(cubCurrent, solveMoveList, "white", "green", "red", "front")
 		if ((self.finishedThreeColorPosition(cubCurrent, "white", "red", "blue")) == False):
@@ -19,11 +20,15 @@ class ManagerStepTwo:
 			self.moving(cubCurrent, solveMoveList, "white", "blue", "orange", "back")
 		if ((self.finishedThreeColorPosition(cubCurrent, "white", "orange", "green")) == False):
 			self.moving(cubCurrent, solveMoveList, "white", "orange", "green", "left")
-		print ("End")
-		cubCurrent.printCubik()
-		for x in solveMoveList:
-			print (x, end=" ")
-		print("")
+		print ("------------------------------------------------")
+		#########################################
+		print ("End") ################################## delete
+		cubCurrent.printCubik() ################################## delete
+		for x in solveMoveList: ################################## delete
+			print (x, end=" ") ################################## delete
+		print("") ################################## delete
+		############################# 
+
 	def finishedThreeColorPosition(self, cubCurrent, colorOne, colorTwo, colorThree):
 		return checkPositionColor(self.cubOrigin, cubCurrent, colorOne, colorTwo, colorThree)
 
@@ -31,16 +36,54 @@ class ManagerStepTwo:
 		return (self.checkerManager.three(cub, colorOne, colorTwo, colorThree))
 
 	def 	moving(self, cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face):
-		# print("Moving three") ################################## delete
 		self.listPositionCubOrigin = self.updatePositionList(self.cubOrigin, colorOne, colorTwo, colorThree)
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
+		
+		if (self.checkSide(cubCurrent, colorOne, colorTwo, colorThree, face)) == False:	
+			if (self.listPositionCubCurrent[0][0] == "upper"):
+				self.moveEdgeDown(cubCurrent, solveMoveList, colorOne, colorTwo, colorThree)
+				self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
+			if 	(self.listPositionCubCurrent[0][0] == "down"):
+				self.moveEdgeDownToTryPosition(cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face)
+
+		
+		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
 		if (self.checkSide(cubCurrent, colorOne, colorTwo, colorThree, face)) == True:
-			# print ("Need to changeSide") ################################### delete
 			self.moveSide(cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face)
 
+	def 	moveEdgeDown(self, cubCurrent, solveMoveList, colorOne, colorTwo, colorThree):
+		count = 0
+		face = "null"
+		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
+		while (self.listPositionCubCurrent[0][0] != "down"):
+			if (self.listPositionCubCurrent[1][0] == "back" or self.listPositionCubCurrent[2][0] == "back"):
+				cubCurrent.moveB()
+				solveMoveList.append("B")
+				face = "back"
+			elif (self.listPositionCubCurrent[1][0] == "front" or self.listPositionCubCurrent[2][0] == "front"):
+				cubCurrent.moveF()
+				solveMoveList.append("F")
+				face = "front"
+			count += 1
+			self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
+		cubCurrent.moveD()
+		solveMoveList.append("D")
+		while (count != 0):
+			if (face == "back"):
+				cubCurrent.moveBackB()
+				solveMoveList.append("B'")
+			elif (face == "front"):
+				cubCurrent.moveBackF()
+				solveMoveList.append("F'")
+			count -= 1
+
+	def 	moveEdgeDownToTryPosition(self, cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face):
+		while (self.checkSide(cubCurrent, colorOne, colorTwo, colorThree, face)) == False:
+			cubCurrent.moveD()
+			solveMoveList.append("D")
+			self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
+
 	def 	checkSide(self, cubCurrent, colorOne, colorTwo, colorThree, face):
-		# print("Origin ",self.listPositionCubOrigin) ################################## delete
-		# print("Current ",self.listPositionCubCurrent)  ################################## delete
 		if (face == "front"):
 			return (self.checkDoubleSide(colorOne, colorTwo, colorThree, face, "right"))
 		elif (face == "right"):
@@ -71,9 +114,7 @@ class ManagerStepTwo:
 				solveMoveList.append("D'")
 				solveMoveList.append("R")
 				solveMoveList.append("D")
-				print ("Front")
 			elif (face == "right"):
-				print ("right")
 				cubCurrent.moveBackB()
 				cubCurrent.moveBackD()
 				cubCurrent.moveB()
@@ -83,7 +124,6 @@ class ManagerStepTwo:
 				solveMoveList.append("B")
 				solveMoveList.append("D")
 			elif (face == "back"):
-				print ("Back")
 				cubCurrent.moveBackL()
 				cubCurrent.moveBackD()
 				cubCurrent.moveL()
@@ -93,7 +133,6 @@ class ManagerStepTwo:
 				solveMoveList.append("L")
 				solveMoveList.append("D")
 			elif (face == "left"):
-				print ("left")
 				cubCurrent.moveBackF()
 				cubCurrent.moveBackD()
 				cubCurrent.moveF()
