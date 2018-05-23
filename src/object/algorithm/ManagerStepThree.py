@@ -84,15 +84,31 @@ class ManagerStepThree:
 
 		checkSideList = self.checkSide(cubCurrent, ColorsList)
 		if (checkSideList[1] == "right"):
-			self.moveFormulaRight()
+			self.moveFormulaRight(cubCurrent, solveMoveList, face)
 		elif (checkSideList[1] == "left"):
 			self.moveFormulaRight()
 		else:
 			print ("WTF??! move to try position")
 			sys.exit(-1)
 
-	def 	moveFormulaLeft(self):
-		pass
+	def 	moveFormulaLeft(self, cubCurrent, solveMoveList, face):
+		if (face == "front"):
+			cubCurrent.moveD()
+			# cubCurrent.moveBackR()
+			# cubCurrent.moveBackD()
+		elif (face == "left"):
+			pass
+		elif (face == "back"):
+			pass
+		elif (face == "right"):
+			pass
 
-	def 	moveFormulaRight(self):
-		pass*
+	def 	moveFormulaRight(self, cubCurrent, solveMoveList, face):
+		if (face == "front"):
+			pass
+		elif (face == "left"):
+			pass
+		elif (face == "back"):
+			pass
+		elif (face == "right"):
+			pass
