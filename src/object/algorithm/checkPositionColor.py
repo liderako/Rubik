@@ -17,7 +17,6 @@ def 	checkPositionColor(cubOrigin, cubCurrent, colorOne, colorTwo, colorThree="n
 		listPositionCubCurrent = checkerManager.three(cubCurrent, colorOne, colorTwo, colorThree)
 		listPositionCubOrigin = checkerManager.three(cubOrigin, colorOne, colorTwo, colorThree)
 		i = 0
-		listOne = listPositionCubOrigin[1]
 		while (i < len(listPositionCubOrigin)):
 			j = 0
 			while (j < len(listPositionCubOrigin[0])):
