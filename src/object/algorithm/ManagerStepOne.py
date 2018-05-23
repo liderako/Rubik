@@ -50,6 +50,7 @@ class ManagerStepOne:
 				cubCurrent.moveBackB()
 				solveMoveList.append("B'")
 			self.listPositionCubCurrent = self.checkerManager.two(cubCurrent, colorOne, colorTwo)
+
 	
 	def 	updateFaceColor(self, cubCurrent, colorOne, colorTwo):
 		self.listPositionCubCurrent = self.checkerManager.two(cubCurrent, colorOne, colorTwo)

@@ -20,17 +20,17 @@ def printSolution(cub, moveList):
         elif move == 'B':
             cub.moveB()
 #
-        elif move == 'U':
+        elif move == "U'":
             cub.moveBackU()
-        elif move == 'D':
+        elif move == "D'":
             cub.moveBackD()
-        elif move == 'R':
+        elif move == "R'":
             cub.moveBackR()
-        elif move == 'L':
+        elif move == "L'":
             cub.moveBackL()
-        elif move == 'F':
+        elif move == "F'":
             cub.moveBackF()
-        elif move == 'B':
+        elif move == "B'":
             cub.moveBackB()
 #
         elif move == 'U2':
@@ -50,7 +50,7 @@ def printSolution(cub, moveList):
         cub.printCubik()
 
 cub = Cubik(3)
-moveList = ["L", "U", "B", "D'"]
+moveList = ['L', 'U','B', "D'"]
 
 printSolution(cub, moveList)
 
