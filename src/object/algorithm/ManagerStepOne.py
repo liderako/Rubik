@@ -1,6 +1,8 @@
 import sys
 from src.object.Cubik import *
 from src.object.algorithm.checkPositionColor import *
+from src.object.managers.MixManager import *
+from src.appendListInList import appendListInList
 
 class ManagerStepOne:
 	
@@ -50,7 +52,6 @@ class ManagerStepOne:
 				cubCurrent.moveBackB()
 				solveMoveList.append("B'")
 			self.listPositionCubCurrent = self.checkerManager.two(cubCurrent, colorOne, colorTwo)
-
 	
 	def 	updateFaceColor(self, cubCurrent, colorOne, colorTwo):
 		self.listPositionCubCurrent = self.checkerManager.two(cubCurrent, colorOne, colorTwo)
@@ -154,39 +155,16 @@ class ManagerStepOne:
 
 	@staticmethod
 	def    changeSide(cubCurrent, solveMoveList, face):
-		if (face == "front"):
-			cubCurrent.moveF()
-			cubCurrent.moveBackU()
-			cubCurrent.moveR()
-			cubCurrent.moveU()
-			solveMoveList.append("F")
-			solveMoveList.append("U'")
-			solveMoveList.append("R")
-			solveMoveList.append("U")
-		elif (face == "right"):
-			cubCurrent.moveR()
-			cubCurrent.moveBackU()
-			cubCurrent.moveB()
-			cubCurrent.moveU()
-			solveMoveList.append("R")
-			solveMoveList.append("U'")
-			solveMoveList.append("B")
-			solveMoveList.append("U")
-		elif (face == "left"):
-			cubCurrent.moveL()
-			cubCurrent.moveBackU()
-			cubCurrent.moveF()
-			cubCurrent.moveU()
-			solveMoveList.append("L")
-			solveMoveList.append("U'")
-			solveMoveList.append("F")
-			solveMoveList.append("U")
-		elif (face == "back"):
-			cubCurrent.moveB()
-			cubCurrent.moveBackU()
-			cubCurrent.moveL()
-			cubCurrent.moveU()
-			solveMoveList.append("B")
-			solveMoveList.append("U'")
-			solveMoveList.append("L")
-			solveMoveList.append("U")
+		mixManager = MixManager()
+		if (face == "front"): # ["F", "U'" "R" "U"]
+			mixManager.mixRun(["F", "U'", "R", "U"], cubCurrent)
+			appendListInList(solveMoveList, ["F", "U'", "R", "U"])
+		elif (face == "right"): # ["R", "U'" "B" "U"]
+			mixManager.mixRun(["R", "U'", "B", "U"], cubCurrent)
+			appendListInList(solveMoveList, ["R", "U'", "B", "U"])
+		elif (face == "left"): # ["L", "U'" "F" "U"]
+			mixManager.mixRun(["L", "U'", "F", "U"], cubCurrent)
+			appendListInList(solveMoveList, ["L", "U'", "F", "U"])
+		elif (face == "back"): # ["B", "U'" "L" "U"]
+			mixManager.mixRun(["B", "U'", "L", "U"], cubCurrent)
+			appendListInList(solveMoveList, ["B", "U'", "L", "U"])
