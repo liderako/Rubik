@@ -143,9 +143,9 @@ class ManagerStepThree:
 		elif (face == "left"):
 			mixManager.mixRun([ "D'", "F'", "D", "F", "D", "L", "D'", "L'" ], cubCurrent)
 			appendListInList(solveMoveList, [ "D'", "F'", "D", "F", "D", "L", "D'", "L'" ])
-		elif (face == "right"): # [ "D'", "B'", "D", "B", "D", "R", "D'", "R'"]
+		elif (face == "right"):
 			mixManager.mixRun([ "D'", "B'", "D", "B", "D", "R", "D'", "R'"], cubCurrent)
 			appendListInList(solveMoveList, [ "D'", "B'", "D", "B", "D", "R", "D'", "R'"])
-		elif (face == "back"): # [ "D", "R", "D'", "R'", "D'", "B'", "D", "B" ]
+		elif (face == "back"):
 			mixManager.mixRun([ "D", "R", "D'", "R'", "D'", "B'", "D", "B" ], cubCurrent)
 			appendListInList(solveMoveList, [ "D", "R", "D'", "R'", "D'", "B'", "D", "B" ])
