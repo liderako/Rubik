@@ -1,6 +1,8 @@
 import sys
 from src.object.Cubik import *
 from src.object.algorithm.checkPositionColor import *
+from src.appendListInList import *
+from src.object.managers.MixManager import *
 
 class ManagerStepTwo:
 	
@@ -41,48 +43,20 @@ class ManagerStepTwo:
 
 	def 	moveEdgeDown(self, cubCurrent, solveMoveList, colorOne, colorTwo, colorThree):
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
-		
-		if (self.listPositionCubCurrent[0][0] != "upper"): ########### delete
-			print ("Upper is not UPPER") ########### delete 
-			sys.exit(-1) ########### delete
-		# print ("Start+___________",self.listPositionCubCurrent)
-		if ((self.listPositionCubCurrent[1][0] == "right" and self.listPositionCubCurrent[2][0] == "front")):
-			inputTmp = 1 ########### delete
-			cubCurrent.moveF()
-			cubCurrent.moveBackD()
-			cubCurrent.moveBackF()
-			solveMoveList.append("F")
-			solveMoveList.append("D'")
-			solveMoveList.append("F'")
-		elif ((self.listPositionCubCurrent[1][0] == "left" and self.listPositionCubCurrent[2][0] == "front")):
-			cubCurrent.moveBackF()
-			cubCurrent.moveD()
-			cubCurrent.moveF()
-			solveMoveList.append("F'")
-			solveMoveList.append("D")
-			solveMoveList.append("F")
-			inputTmp = 2 ########### delete
-		elif ((self.listPositionCubCurrent[1][0] == "right" and self.listPositionCubCurrent[2][0] == "back")):
-			cubCurrent.moveBackB()
-			cubCurrent.moveD()
-			cubCurrent.moveB()
-			solveMoveList.append("B'")
-			solveMoveList.append("D")
-			solveMoveList.append("B")
-			inputTmp = 3 ########### delete
-		elif ((self.listPositionCubCurrent[1][0] == "left" and self.listPositionCubCurrent[2][0] == "back")):
-			cubCurrent.moveB()
-			cubCurrent.moveBackD()
-			cubCurrent.moveBackB()
-			solveMoveList.append("B")
-			solveMoveList.append("D'")
-			solveMoveList.append("B")
-			inputTmp = 4 ########### delete
+		mixManager = MixManager()
+		if ((self.listPositionCubCurrent[1][0] == "right" and self.listPositionCubCurrent[2][0] == "front")): # ["F", "D'", "F'"]
+			mixManager.mixRun(["F", "D'", "F'"], cubCurrent)
+			appendListInList(solveMoveList, ["F", "D'", "F'"])
+		elif ((self.listPositionCubCurrent[1][0] == "left" and self.listPositionCubCurrent[2][0] == "front")): # ["F'", "D", "F"]
+			mixManager.mixRun(["F'", "D", "F"], cubCurrent)
+			appendListInList(solveMoveList, ["F'", "D", "F"])
+		elif ((self.listPositionCubCurrent[1][0] == "right" and self.listPositionCubCurrent[2][0] == "back")): # ["B'", "D", "B"]
+			mixManager.mixRun(["B'", "D", "B"], cubCurrent)
+			appendListInList(solveMoveList, ["B'", "D", "B"])
+		elif ((self.listPositionCubCurrent[1][0] == "left" and self.listPositionCubCurrent[2][0] == "back")): # ["B", "D'", "B'"]
+			mixManager.mixRun(["B", "D'", "B'"], cubCurrent)
+			appendListInList(solveMoveList, ["B", "D'", "B'"])
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
-		if (self.listPositionCubCurrent[0][0] != "down"): ########### delete
-			print (self.listPositionCubCurrent) ########### delete
-			print ("Down is not true, flag", inputTmp) ########### delete
-			sys.exit(-1) ########### delete 
 
 	def 	moveEdgeDownToTryPosition(self, cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face):
 		while (self.checkSide(cubCurrent, colorOne, colorTwo, colorThree, face)) == False:
@@ -111,40 +85,17 @@ class ManagerStepTwo:
 		return (count == 2)
 
 	def 	moveSide(self, cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face):
+		mixManager = MixManager()
 		while ((self.finishedThreeColorPosition(cubCurrent, colorOne, colorTwo, colorThree)) == False):
-			if (face == "front"):
-				cubCurrent.moveBackR()
-				cubCurrent.moveBackD()
-				cubCurrent.moveR()
-				cubCurrent.moveD()
-				solveMoveList.append("R'")
-				solveMoveList.append("D'")
-				solveMoveList.append("R")
-				solveMoveList.append("D")
-			elif (face == "right"):
-				cubCurrent.moveBackB()
-				cubCurrent.moveBackD()
-				cubCurrent.moveB()
-				cubCurrent.moveD()
-				solveMoveList.append("B'")
-				solveMoveList.append("D'")
-				solveMoveList.append("B")
-				solveMoveList.append("D")
-			elif (face == "back"):
-				cubCurrent.moveBackL()
-				cubCurrent.moveBackD()
-				cubCurrent.moveL()
-				cubCurrent.moveD()
-				solveMoveList.append("L'")
-				solveMoveList.append("D'")
-				solveMoveList.append("L")
-				solveMoveList.append("D")
-			elif (face == "left"):
-				cubCurrent.moveBackF()
-				cubCurrent.moveBackD()
-				cubCurrent.moveF()
-				cubCurrent.moveD()
-				solveMoveList.append("F'")
-				solveMoveList.append("D'")
-				solveMoveList.append("F")
-				solveMoveList.append("D")
+			if (face == "front"): # ["R'", "D'", "R", "D"]
+				mixManager.mixRun(["R'", "D'", "R", "D"], cubCurrent)
+				appendListInList(solveMoveList, ["R'", "D'", "R", "D"])
+			elif (face == "right"): # ["B'", "D'", "B", "D"]
+				mixManager.mixRun(["B'", "D'", "B", "D"], cubCurrent)
+				appendListInList(solveMoveList, ["B'", "D'", "B", "D"])
+			elif (face == "back"): # ["L'", "D'", "L", "D"]
+				mixManager.mixRun(["L'", "D'", "L", "D"], cubCurrent)
+				appendListInList(solveMoveList, ["L'", "D'", "L", "D"])
+			elif (face == "left"): # ["F'", "D'", "F", "D"]
+				mixManager.mixRun(["F'", "D'", "F", "D"], cubCurrent)
+				appendListInList(solveMoveList, ["F'", "D'", "F", "D"])
