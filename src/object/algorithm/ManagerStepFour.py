@@ -10,15 +10,16 @@ class ManagerStepFour:
 		mixManager = MixManager()
 		moveList = ["F", "L", "D", "L'", "D'", "F'"]
 
-		one = 1
-		two = 4
-		# one,two = checkBackState(cubCurrent.down, "yellow")
+		# one = 1
+		# two = 4
+		one,two = checkBackState(cubCurrent.down, "yellow")
 		if (one == 4):
 			return True
 		if (one == 1):
 			mixManager.mixRun(moveList, cubCurrent)
 			appendListInList(solveMoveList, moveList)
-		# 	one,two = checkBackState(cubCurrent.down, "yellow")
+		
+		one,two = checkBackState(cubCurrent.down, "yellow")
 		if (one == 2 and two == 0):
 			mixManager.mixRun(moveList, cubCurrent)
 			appendListInList(solveMoveList, moveList)
@@ -31,15 +32,24 @@ class ManagerStepFour:
 		elif (one == 2 and two == 3):
 			mixManager.mixRun(["D", "F", "L", "D", "L'", "D'", "F'"], cubCurrent)
 			appendListInList(solveMoveList, ["D", "F", "L", "D", "L'", "D'", "F'"])
-		# one,two = checkBackState(cubCurrent.down, "yellow")
+
+		
+		one,two = checkBackState(cubCurrent.down, "yellow")
+		# print ("2|", one, two)		
+		
 		if (one == 3 and two == 0):
 			mixManager.mixRun(moveList, cubCurrent)
 			appendListInList(solveMoveList, moveList)
 		elif (one == 3 and two == 1):
 			mixManager.mixRun(["D", "F", "L", "D", "L'", "D'", "F'"], cubCurrent)
 			appendListInList(solveMoveList, ["D", "F", "L", "D", "L'", "D'", "F'"])
-		# one,two = checkBackState(cubCurrent.down, "yellow")
+		
+		one,two = checkBackState(cubCurrent.down, "yellow")
+		# # print ("3|", one, two)
+		# cubCurrent.printCubik()
 		if (one == 4):
+			cubCurrent.printCubik()
+			print ("END")
 			return True
 		else:
 			print ("what's happened")

@@ -48,4 +48,5 @@ class Algorithm:
 			print (x, end=" ")
 		print("")
 		###
+		
 		managerStepFour.run(self.cub, self.solveMoveList)
