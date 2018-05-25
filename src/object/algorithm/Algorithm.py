@@ -19,7 +19,7 @@ class Algorithm:
 		managerStepTwo = ManagerStepTwo(cubOrigin)
 		managerStepThree = ManagerStepThree(cubOrigin)
 		managerStepFour = ManagerStepFour()
-		# managerStepFive = ManagerStepFive(cubOrigin)
+		managerStepFive = ManagerStepFive(cubOrigin)
 
 		managerStepOne.run(self.cub, self.solveMoveList)
 		
@@ -52,8 +52,18 @@ class Algorithm:
 		# ###
 		
 		managerStepFour.run(self.cub, self.solveMoveList)
+		# ###
+		# print ("STEP FOUR")
+		# self.cub.printCubik()
+		# print ("Solve Move")
+		# for x in self.solveMoveList:
+		# 	print (x, end=" ")
+		# print("")
+		# ###
+
+		managerStepFive.run(self.cub, self.solveMoveList)
 		###
-		print ("STEP FOUR")
+		print ("STEP FIVE")
 		self.cub.printCubik()
 		print ("Solve Move")
 		for x in self.solveMoveList:
