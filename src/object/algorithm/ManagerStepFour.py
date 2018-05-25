@@ -5,13 +5,9 @@ from src.object.managers.MixManager import *
 from src.appendListInList import appendListInList
 
 class ManagerStepFour:
-
 	def 	run(self, cubCurrent, solveMoveList):
 		mixManager = MixManager()
 		moveList = ["F", "L", "D", "L'", "D'", "F'"]
-
-		# one = 1
-		# two = 4
 		one,two = checkBackState(cubCurrent.down, "yellow")
 		if (one == 4):
 			return True
@@ -32,10 +28,7 @@ class ManagerStepFour:
 		elif (one == 2 and two == 3):
 			mixManager.mixRun(["D", "F", "L", "D", "L'", "D'", "F'"], cubCurrent)
 			appendListInList(solveMoveList, ["D", "F", "L", "D", "L'", "D'", "F'"])
-
-		
-		one,two = checkBackState(cubCurrent.down, "yellow")
-		# print ("2|", one, two)		
+		one,two = checkBackState(cubCurrent.down, "yellow")		
 		
 		if (one == 3 and two == 0):
 			mixManager.mixRun(moveList, cubCurrent)
@@ -45,11 +38,8 @@ class ManagerStepFour:
 			appendListInList(solveMoveList, ["D", "F", "L", "D", "L'", "D'", "F'"])
 		
 		one,two = checkBackState(cubCurrent.down, "yellow")
-		# # print ("3|", one, two)
-		# cubCurrent.printCubik()
 		if (one == 4):
 			cubCurrent.printCubik()
-			print ("END")
 			return True
 		else:
 			print ("what's happened")
