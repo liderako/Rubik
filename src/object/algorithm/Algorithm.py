@@ -4,6 +4,7 @@ from src.object.algorithm.ManagerStepTwo import *
 from src.object.algorithm.ManagerStepThree import *
 from src.object.algorithm.ManagerStepFour import *
 from src.object.algorithm.ManagerStepFive import *
+from src.object.algorithm.ManagerStepSix import *
 
 from src.object.Cubik import *
 
@@ -20,6 +21,7 @@ class Algorithm:
 		managerStepThree = ManagerStepThree(cubOrigin)
 		managerStepFour = ManagerStepFour()
 		managerStepFive = ManagerStepFive(cubOrigin)
+		managerStepSix = ManagerStepSix(cubOrigin)
 
 		managerStepOne.run(self.cub, self.solveMoveList)
 		
@@ -63,7 +65,17 @@ class Algorithm:
 
 		managerStepFive.run(self.cub, self.solveMoveList)
 		###
-		print ("STEP FIVE")
+		# print ("STEP FIVE")
+		# self.cub.printCubik()
+		# print ("Solve Move")
+		# for x in self.solveMoveList:
+		# 	print (x, end=" ")
+		# print("")
+		# ###
+
+		managerStepSix.run(self.cub, self.solveMoveList)
+		###
+		print ("STEP SIX")
 		self.cub.printCubik()
 		print ("Solve Move")
 		for x in self.solveMoveList:

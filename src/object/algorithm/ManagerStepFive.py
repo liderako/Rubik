@@ -8,8 +8,6 @@ class ManagerStepFive:
 
 	def __init__(self, cubOrigin):
 		self.cubOrigin = cubOrigin
-		self.listPositionCubCurrent = list()
-		self.listPositionCubOrigin = list()
 		self.checkerManager = CheckerColors()
 
 	def 	run(self, cubCurrent, solveMoveList):

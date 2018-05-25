@@ -32,13 +32,13 @@ class ManagerStepTwo:
 		self.listPositionCubOrigin = self.updatePositionList(self.cubOrigin, colorOne, colorTwo, colorThree)
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
 		
-		if (self.checkSide(cubCurrent, colorOne, colorTwo, colorThree, face)) == False:	
+		if (self.checkSide(cubCurrent, face)) == False:	
 			if (self.listPositionCubCurrent[0][0] == "upper"):			
 				self.moveEdgeDown(cubCurrent, solveMoveList, colorOne, colorTwo, colorThree)
 			if 	(self.listPositionCubCurrent[0][0] == "down"):
 				self.moveEdgeDownToTryPosition(cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face)
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
-		if (self.checkSide(cubCurrent, colorOne, colorTwo, colorThree, face)) == True:
+		if (self.checkSide(cubCurrent, face)) == True:
 			self.moveSide(cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face)
 
 	def 	moveEdgeDown(self, cubCurrent, solveMoveList, colorOne, colorTwo, colorThree):
@@ -59,23 +59,23 @@ class ManagerStepTwo:
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
 
 	def 	moveEdgeDownToTryPosition(self, cubCurrent, solveMoveList, colorOne, colorTwo, colorThree, face):
-		while (self.checkSide(cubCurrent, colorOne, colorTwo, colorThree, face)) == False:
+		while (self.checkSide(cubCurrent, face)) == False:
 			cubCurrent.moveD()
 			solveMoveList.append("D")
 			self.listPositionCubCurrent = self.updatePositionList(cubCurrent, colorOne, colorTwo, colorThree)
 
-	def 	checkSide(self, cubCurrent, colorOne, colorTwo, colorThree, face):
+	def 	checkSide(self, cubCurrent, face):
 		if (face == "front"):
-			return (self.checkDoubleSide(colorOne, colorTwo, colorThree, face, "right"))
+			return (self.checkDoubleSide(face, "right"))
 		elif (face == "right"):
-			return (self.checkDoubleSide(colorOne, colorTwo, colorThree, face, "back"))
+			return (self.checkDoubleSide(face, "back"))
 		elif (face == "back"):
-			return (self.checkDoubleSide(colorOne, colorTwo, colorThree, face, "left"))
+			return (self.checkDoubleSide(face, "left"))
 		elif (face == "left"):
-			return (self.checkDoubleSide(colorOne, colorTwo, colorThree, face, "front"))
+			return (self.checkDoubleSide(face, "front"))
 		return False
 
-	def 	checkDoubleSide(self, colorOne, colorTwo, colorThree, face, subFace):
+	def 	checkDoubleSide(self, face, subFace):
 		count = 0
 		i = 0
 		while (i < len(self.listPositionCubCurrent)):
