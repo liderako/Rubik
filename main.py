@@ -37,6 +37,7 @@ for x in moveList:
     print (x, end=" ")
 cub.printCubik()
 
+print ("Start Algorithm")
 algorithm = Algorithm(cub)
 algorithm.run()
 

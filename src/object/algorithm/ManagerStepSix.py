@@ -17,12 +17,76 @@ class ManagerStepSix:
 			return True
 		else:
 			res = self.checkTryPosition(cubCurrent)
-			if (res == 4):
+			if (res[0] == 4):
 				return True
 			else:
-				if res == 0:
-					self.moveOneCornernToTryPosition(cubCurrent, solveMoveList)
-				pass
+				if res[0] == 0:
+					self.moveToTryPosition(cubCurrent, solveMoveList, ["D", "L", "D'", "R'", "D", "L'", "D'", "R"])
+				res = self.checkTryPosition(cubCurrent)
+				colorsList = res[1]
+				patternList = self.getPattern(cubCurrent, colorsList)
+				self.moveDownFace(cubCurrent, solveMoveList, patternList)
+
+	def 	moveDownFace(self, cubCurrent, solveMoveList, patternList):
+		face = patternList[1]
+		if (face == "frontFace"):
+			if (patternList[0] == "right"):
+				self.moveToTryPosition(cubCurrent, solveMoveList, ["D", "L", "D'", "R'", "D", "L'", "D'", "R"])
+			else:
+				self.moveToTryPosition(cubCurrent, solveMoveList, ["D'", "R'", "D", "L", "D'", "R", "D", "L'"])
+		elif (face == "backFace"):
+			if (patternList[0] == "right"):
+				self.moveToTryPosition(cubCurrent, solveMoveList, ["D", "R", "D'", "L'", "D", "R'", "D'", "L"])
+			else:
+				self.moveToTryPosition(cubCurrent, solveMoveList, ["D'", "L'", "D", "R", "D'", "L", "D", "R'"])
+		elif (face == "rightFace"):
+			if (patternList[0] == "right"):
+				self.moveToTryPosition(cubCurrent, solveMoveList, ["D", "F", "D'", "B'", "D", "F'", "D'", "B"])
+			else:
+				self.moveToTryPosition(cubCurrent, solveMoveList, ["D'", "B'", "D", "F", "D'", "B", "D", "F'"])
+		elif (face == "leftFace"):
+			if (patternList[0] == "right"):
+				self.moveToTryPosition(cubCurrent, solveMoveList, ["D", "B", "D'", "F'", "D", "B'", "D'", "F"])
+			else:
+				self.moveToTryPosition(cubCurrent, solveMoveList, ["D'", "F'", "D", "B", "D'", "F", "D", "B'"])
+	
+	def 	getPattern(self, cubCurrent, colorsList):
+		patternList = list()
+		if (["yellow", "green", "red"] == colorsList):
+			patternList.append(self.getDirection(cubCurrent))
+			if (patternList[0] == "left"):
+				patternList.append("frontFace")
+			else:
+				patternList.append("rightFace")
+		elif (["yellow", "blue", "orange"] == colorsList):
+			patternList.append(self.getDirection(cubCurrent))
+			if (patternList[0] == "left"):
+				patternList.append("backFace")
+			else:
+				patternList.append("leftFace")
+		elif (["yellow", "blue", "red"] == colorsList):
+			patternList.append(self.getDirection(cubCurrent))
+			if (patternList[0] == "left"):
+				patternList.append("rightFace")
+			else:
+				patternList.append("backFace")
+		elif (["yellow", "green", "orange"] == colorsList):
+			patternList.append(self.getDirection(cubCurrent))
+			if (patternList[0] == "left"):
+				patternList.append("leftFace")
+			else:
+				patternList.append("frontFace")
+		return patternList
+
+	def 	getDirection(self, cubCurrent):
+		cubCurrent.moveD()
+		res = self.checkTryPosition(cubCurrent)
+		direction = "left"
+		if (res[0] == 0):
+			direction = "right"
+		cubCurrent.moveBackD()
+		return (direction)
+
 	def 	checkCorner(self, cubCurrent):
 		count = 0
 		if ((self.finishedThreeColorPosition(cubCurrent, ["yellow", "green", "red"])) == True):
@@ -40,19 +104,24 @@ class ManagerStepSix:
 
 	def 	checkTryPosition(self, cubCurrent):
 		count = 0
+		correctCorner = list()
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, ["yellow", "green", "red"])
 		if ((self.checkSide(cubCurrent, "front"))) == True:
 			count += 1
+			correctCorner = ["yellow", "green", "red"]
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, ["yellow", "blue", "red"])
 		if ((self.checkSide(cubCurrent, "right"))) == True:
 			count += 1
+			correctCorner = ["yellow", "blue", "red"]
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, ["yellow", "blue", "orange"])
 		if ((self.checkSide(cubCurrent, "back"))) == True: 
 			count += 1
+			correctCorner = ["yellow", "blue", "orange"]
 		self.listPositionCubCurrent = self.updatePositionList(cubCurrent, ["yellow", "green", "orange"])
 		if ((self.checkSide(cubCurrent, "left"))) == True:
 			count += 1
-		return (count)
+			correctCorner = ["yellow", "green", "orange"]
+		return (count, correctCorner)
 
 	def finishedThreeColorPosition(self, cubCurrent, colorsList):
 		return checkPositionColor(self.cubOrigin, cubCurrent, colorsList[0], colorsList[1], colorsList[2])
@@ -77,9 +146,9 @@ class ManagerStepSix:
 			i += 1
 		return (count == 2)
 
-	def 	moveOneCornernToTryPosition(self, cubCurrent, solveMoveList):
+	def 	moveToTryPosition(self, cubCurrent, solveMoveList, listMix):
 		mixManager = MixManager()
-		mixManager.mixRun(["D", "L", "D'", "R'", "D", "L'", "D'", "R"], cubCurrent)
-		appendListInList(solveMoveList, ["D", "L", "D'", "R'", "D", "L'", "D'", "R"])
+		mixManager.mixRun(listMix, cubCurrent)
+		appendListInList(solveMoveList, listMix)
 
 

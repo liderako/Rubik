@@ -156,15 +156,15 @@ class ManagerStepOne:
 	@staticmethod
 	def    changeSide(cubCurrent, solveMoveList, face):
 		mixManager = MixManager()
-		if (face == "front"): # ["F", "U'" "R" "U"]
+		if (face == "front"):
 			mixManager.mixRun(["F", "U'", "R", "U"], cubCurrent)
 			appendListInList(solveMoveList, ["F", "U'", "R", "U"])
-		elif (face == "right"): # ["R", "U'" "B" "U"]
+		elif (face == "right"):
 			mixManager.mixRun(["R", "U'", "B", "U"], cubCurrent)
 			appendListInList(solveMoveList, ["R", "U'", "B", "U"])
-		elif (face == "left"): # ["L", "U'" "F" "U"]
+		elif (face == "left"):
 			mixManager.mixRun(["L", "U'", "F", "U"], cubCurrent)
 			appendListInList(solveMoveList, ["L", "U'", "F", "U"])
-		elif (face == "back"): # ["B", "U'" "L" "U"]
+		elif (face == "back"):
 			mixManager.mixRun(["B", "U'", "L", "U"], cubCurrent)
 			appendListInList(solveMoveList, ["B", "U'", "L", "U"])

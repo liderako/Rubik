@@ -39,8 +39,4 @@ class ManagerStepFour:
 		
 		one,two = checkBackState(cubCurrent.down, "yellow")
 		if (one == 4):
-			cubCurrent.printCubik()
 			return True
-		else:
-			print ("what's happened")
-			sys.exit(-1)

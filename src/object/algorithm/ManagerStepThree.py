@@ -23,7 +23,7 @@ class ManagerStepThree:
 			self.moving(cubCurrent, solveMoveList, ["blue", "red"], "back")
 		if ((self.finishedThreeColorPosition(cubCurrent, ["red", "green"])) == False):
 			self.moving(cubCurrent, solveMoveList, ["red", "green"], "right")
-		cubCurrent.printCubik()
+
 	def finishedThreeColorPosition(self, cubCurrent, colorsList):
 		return checkPositionColor(self.cubOrigin, cubCurrent, colorsList[0], colorsList[1])
 
