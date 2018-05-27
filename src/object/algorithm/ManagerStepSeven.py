@@ -1,6 +1,6 @@
 import sys
 from src.object.Cubik import *
-from src.object.algorithm.checkPositionColor import *
+from src.checkPositionColor import *
 from src.object.managers.MixManager import *
 from src.appendListInList import appendListInList
 

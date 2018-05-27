@@ -1,9 +1,5 @@
 import sys
-from Cubik import *
-
-
-
-#U D R L F B
+from src.object.Cubik import *
 
 def printSolution(cub, moveList):
     for i, move in enumerate(moveList):
@@ -48,10 +44,3 @@ def printSolution(cub, moveList):
 
         print ("Move number ", i, "move ", move)
         cub.printCubik()
-
-cub = Cubik(3)
-moveList = ['L', 'U','B', "D'"]
-
-printSolution(cub, moveList)
-
-#cub.printCubik()

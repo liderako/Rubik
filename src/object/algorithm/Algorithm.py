@@ -16,6 +16,7 @@ class Algorithm:
 
 	def 	run(self):
 		cubOrigin = Cubik(3)
+
 		managerStepOne = ManagerStepOne(cubOrigin)
 		managerStepTwo = ManagerStepTwo(cubOrigin)
 		managerStepThree = ManagerStepThree(cubOrigin)
@@ -23,6 +24,7 @@ class Algorithm:
 		managerStepFive = ManagerStepFive(cubOrigin)
 		managerStepSix = ManagerStepSix(cubOrigin)
 		managerStepSeven = ManagerStepSeven(cubOrigin)
+		
 		managerStepOne.run(self.cub, self.solveMoveList)
 		managerStepTwo.run(self.cub, self.solveMoveList)
 		managerStepThree.run(self.cub, self.solveMoveList)
@@ -30,4 +32,4 @@ class Algorithm:
 		managerStepFive.run(self.cub, self.solveMoveList)
 		managerStepSix.run(self.cub, self.solveMoveList)
 		managerStepSeven.run(self.cub, self.solveMoveList)
-		return self.solveMoveList
+		return (self.solveMoveList)

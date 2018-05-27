@@ -1,6 +1,6 @@
 import sys
 from src.object.Cubik import *
-from src.object.algorithm.checkPositionColor import *
+from src.checkPositionColor import *
 from src.object.managers.MixManager import *
 from src.appendListInList import appendListInList
 
@@ -82,7 +82,7 @@ class ManagerStepFive:
 			appendListInList(solveMoveList, ["L", "D", "L'", "D", "L", "D2", "L'", "D"])
 		elif (face == "back"):
 			mixManager.mixRun(["R", "D", "R'", "D", "R", "D2", "R'", "D"], cubCurrent)
-			appendListInList(solveMoveList, [["R", "D", "R'", "D", "R", "D2", "R'", "D"]])
+			appendListInList(solveMoveList, ["R", "D", "R'", "D", "R", "D2", "R'", "D"])
 		elif (face == "right"):
 			mixManager.mixRun(["F", "D", "F'", "D", "F", "D2", "F'", "D"], cubCurrent)
 			appendListInList(solveMoveList, ["F", "D", "F'", "D", "F", "D2", "F'", "D"])

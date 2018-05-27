@@ -6,6 +6,7 @@ from src.object.managers.MixManager import MixManager
 from src.object.Cubik import Cubik
 from src.object.CheckerColors import CheckerColors
 from src.object.algorithm.Algorithm import *
+from src.printSolution import *
 
 stringUsage = "Usage: main.py [-i or -f] [count i or fileName]"
 if (len(sys.argv) != 3):
@@ -35,9 +36,11 @@ mixManager.mixRun(moveList, cub)
 print ("MixMoveList")
 for x in moveList:
     print (x, end=" ")
+print ("Mix state cubik")
 cub.printCubik()
 
-print ("Start Algorithm")
 algorithm = Algorithm(cub)
-algorithm.run()
+cubOrigin = Cubik(3)
+mixManager.mixRun(moveList, cubOrigin)
+printSolution(cubOrigin, algorithm.run())
 
