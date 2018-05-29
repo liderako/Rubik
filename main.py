@@ -66,25 +66,15 @@ if (cubOrigin.hash == cub.hash):
     print ("The cube is already solved")
     sys.exit(-1)
 solution = algorithm.run()
-#solution = optimizationMove(solution)
+subSolution = optimizationMove(solution)
 mixManager.mixRun(moveList, cubOrigin)
 if (len(sys.argv) == 4 and sys.argv[3] != "-wc"):
-    printSolution(cubOrigin, solution, sys.argv[3])
+    printSolution(cubOrigin, subSolution, sys.argv[3])
 else:
     i = 0
-    for x in solution:
-        if (i != 0 and i != len(solution)):
+    for x in subSolution:
+        if (i != 0 and i != len(subSolution)):
             print (end=" ")
         print (x, end="")
         i += 1
     print ("")
-
-# lst = algorithm.run()
-# c = 0
-# for m in lst:
-#     if c != 15:
-#         print (m, end='')
-#         c += 1
-#     if c == 15:
-#         c = 0
-#         print ("\n")

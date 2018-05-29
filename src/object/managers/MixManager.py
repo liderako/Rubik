@@ -11,7 +11,7 @@ class MixManager:
 
     def generateRandomMove(self, countMove):
         if (countMove > self.maxCount):
-            errorExit("Too big i")
+            errorExit("Too big i, max number is 500")
         listMove = list()
         size = len(self.listAvailableCommand) - 1
         while countMove > 0:

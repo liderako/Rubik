@@ -1,13 +1,12 @@
 import sys
 
 def optimizationMove(solution):
-    len1 = len(solution)
-    print ("Len ", len1)
+    lenOne = len(solution)
     i = 0
     newlst = []
-    while (i < len1):
+    while (i < lenOne):
         f = 0
-        if (i + 2 < len1):
+        if (i + 2 < lenOne):
             if (solution[i] == solution[i + 1] and solution[i + 1] == solution[i + 2]):
                 if solution[i] == "F":
                     newlst.append("F'")
