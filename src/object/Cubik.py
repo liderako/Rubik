@@ -1,5 +1,4 @@
 from colored import fg, bg, attr
-import hashlib
 import sys
 
 class Cubik:
@@ -14,26 +13,6 @@ class Cubik:
         self.left = self.listFill(colors[3], self.size)
         self.upper = self.listFill(colors[4], self.size)
         self.down = self.listFill(colors[5], self.size)
-        self.hash = ""
-        self.mathHash()
-
-    def mathHash(self):
-        hashObj = hashlib.md5()
-        string = ""
-        i = 0
-        while (i < self.size):
-            j = 0
-            while (j < self.size):
-                string = string + self.front[i][j]
-                string = string + self.back[i][j]
-                string = string + self.right[i][j]
-                string = string + self.left[i][j]
-                string = string + self.upper[i][j]
-                string = string + self.down[i][j]
-                j += 1
-            i += 1;
-        hashObj.update(string.encode('utf-8'))
-        self.hash = hashObj.hexdigest()
 
     def listFill(self, color, size):
         list = []

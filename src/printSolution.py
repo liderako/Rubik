@@ -1,11 +1,7 @@
 import sys
-from Cubik import *
+from src.object.Cubik import *
 
-
-
-#U D R L F B
-
-def printSolution(cub, moveList):
+def printSolution(cub, moveList, flag):
     for i, move in enumerate(moveList):
         if move == 'U':
             cub.moveU()
@@ -19,7 +15,7 @@ def printSolution(cub, moveList):
             cub.moveF()
         elif move == 'B':
             cub.moveB()
-#
+
         elif move == "U'":
             cub.moveBackU()
         elif move == "D'":
@@ -47,11 +43,7 @@ def printSolution(cub, moveList):
             cub.moveDoubleB()
 
         print ("Move number ", i, "move ", move)
-        cub.printCubik()
-
-cub = Cubik(3)
-moveList = ['L', 'U','B', "D'"]
-
-printSolution(cub, moveList)
-
-#cub.printCubik()
+        if (flag == "-g"):
+            cub.printCubik()
+        else:
+            cub.printCubikText()

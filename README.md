@@ -16,7 +16,23 @@ Algorithms & AI
 ```
 ### Run
 ```
-python main.py [-i or -f] [number i or fileName]
+Usage: main.py String or [-i or -f or --help or -h] [count i or fileName] [-g or -gwt]
+```
+### Usage
+```
+    Availabe move [ F B R L U D ]
+    Modificator [ ' ] and [ 2 ]
+    Example: F2 B' U2
+    -i. This is random generator Mix moving.
+    Example: python main.py -f 25 -g
+    -f. This is read from file.
+    Example: python main.py -f fileName -g
+    -g. This is color print Solution.
+    Example: python main.py -i 25 -g
+    -gt. This is withor print Solution.
+    Example: python main.py -f fileName -gwt
+    -wc. This is withor color.
+    Example: python main.py -f fileName -wc
 ```
 ## :muscle: Authors
 * [**Antonio Sviridov**](https://github.com/liderako/)

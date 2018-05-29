@@ -1,6 +1,5 @@
 import sys
-#from src.object.Cubik import Cubik
-from Cubik import Cubik
+from src.object.Cubik import Cubik
 
 class CheckerColors:
 
