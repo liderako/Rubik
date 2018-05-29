@@ -7,4 +7,4 @@ def optimizationMove(solution):
     while (i > len):
         if (i + 2 < len):
             if (solution[i] == solution[i + 1] and solution[i + 2]):
-                
+            	

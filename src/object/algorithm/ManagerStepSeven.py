@@ -17,6 +17,9 @@ class ManagerStepSeven:
 
 
 	def 	run(self, cubCurrent, solveMoveList):
+		cubCurrent.mathHash()
+		if (self.cubOrigin.hash == cubCurrent.hash):
+			return True
 		self.moveSide(cubCurrent, solveMoveList, self.cornerOne)
 		self.moveDown(cubCurrent, solveMoveList)	
 		self.moveSide(cubCurrent, solveMoveList, self.cornerTwo)

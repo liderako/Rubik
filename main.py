@@ -49,7 +49,9 @@ else:
     moveList = readBuffer.split(" ")
 cub = Cubik(3)
 mixManager.mixRun(moveList, cub)
-
+cub.mathHash()
+algorithm = Algorithm(cub)
+cubOrigin = Cubik(3)
 if (len(sys.argv) == 4 and sys.argv[3] != "-wc"):
     print ("Mix MoveList")
     for x in moveList:
@@ -60,8 +62,9 @@ if (len(sys.argv) == 4 and sys.argv[3] != "-wc"):
         cub.printCubik()
     else:
         cub.printCubikText()
-algorithm = Algorithm(cub)
-cubOrigin = Cubik(3)
+if (cubOrigin.hash == cub.hash):
+    print ("The cube is already solved")
+    sys.exit(-1)
 solution = algorithm.run()
 #solution = optimizationMove(solution)
 mixManager.mixRun(moveList, cubOrigin)
