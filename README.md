@@ -26,12 +26,12 @@ Usage: main.py String or [-i or -f or --help or -h] [count i or fileName] [-g or
     -i. This is random generator Mix moving.
     Example: python main.py -f 25 -g
     -f. This is read from file.
-    Example: python main.py -f fileName -g
+    Example: python main.py -i fileName -g
     -g. This is color print Solution.
     Example: python main.py -i 25 -g
-    -gt. This is withor print Solution.
+    -gt. This is without color
     Example: python main.py -f fileName -gwt
-    -wc. This is withor color.
+    -wc. This is without print Solution. Only steps move
     Example: python main.py -f fileName -wc
 ```
 ## :muscle: Authors
