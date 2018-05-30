@@ -16,10 +16,10 @@ if (len(sys.argv) == 2 and (sys.argv[1] == "--help" or sys.argv[1] == "-h")):
     print ("    Modificator [ ' ] and [ 2 ]")
     print ("    Example: F2 B' U2")
     print ("    -i. This is random generator Mix moving.\n    Example: python main.py -f 25 -g")
-    print ("    -f. This is read from file.\n    Example: python main.py -f fileName -g")
+    print ("    -f. This is read from file.\n    Example: python main.py -i fileName -g")
     print ("    -g. This is color print Solution.\n    Example: python main.py -i 25 -g")
-    print ("    -gt. This is withor print Solution.\n    Example: python main.py -f fileName -gwt")
-    print ("    -wc. This is withor color.\n    Example: python main.py -f fileName -wc")
+    print ("    -gt. This is without print Solution.\n    Example: python main.py -f fileName -gt")
+    print ("    -wc. This is without color.\n    Example: python main.py -f fileName -wc")
     sys.exit(-1)
 
 if (len(sys.argv) != 4 and len(sys.argv) != 2):
